@@ -1,0 +1,1 @@
+ffmpeg -loop 1 -t 0.03 -i on.png -loop 1 -t 0.03 -i off.png -filter_complex "[0:v]scale=1920:720,setsar=1[v0]; [1:v]scale=1920:720,setsar=1[v1]; [v0][v1]concat=n=2:v=1[out]" -map "[out]" -r 33.33 -plays 0 blinking.apng
