@@ -32,14 +32,30 @@
       "images/0.03s.apng",
       "images/0.06.apng",
       "images/1.apng",
+      "images/off.png",
     ];
 
     let currentIndex = 0;
     const imgElement = document.getElementById("apngImage");
 
-    imgElement.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % images.length;
+    // 공통 이미지 변경 함수
+    function updateImage(index) {
+      currentIndex = (index + images.length) % images.length; // 음수 방지
       imgElement.src = images[currentIndex];
+    }
+
+    // 클릭 이벤트
+    imgElement.addEventListener("click", () => {
+      updateImage(currentIndex + 1);
+    });
+
+    // 키보드 이벤트
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") {
+        updateImage(currentIndex + 1);
+      } else if (event.key === "ArrowLeft") {
+        updateImage(currentIndex - 1);
+      }
     });
   </script>
 </body>
